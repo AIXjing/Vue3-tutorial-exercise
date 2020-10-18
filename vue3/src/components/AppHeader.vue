@@ -4,7 +4,7 @@
       from-blue-800 to-blue-600 text-white
       px-4 py-2"
   >
-    <router-link to="/heros"> My heros </router-link>
+    <router-link class="mx-4" to="/heros"> My heros </router-link>
     <router-link to="/calendar"> Calendar </router-link>
   </nav>
 </template>
