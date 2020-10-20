@@ -4,12 +4,25 @@
       from-blue-800 to-blue-600 text-white
       px-4 py-2"
   >
-    <router-link class="mx-4" to="/heros"> My heros </router-link>
-    <router-link to="/calendar"> Calendar </router-link>
+    <router-link v-for="item in list" :key="item.to"
+                 class="mx-4" :to="item.to"> {{ item.title }} </router-link>
+
   </nav>
 </template>
 
 <script>
-export default {}
+export default {
+  data(){
+    return {
+      list:[
+        {title: "My heros", to: "/heros"},
+        {title: "Calendar", to: "/calendar"},
+        {title: "Markdown", to: "/markdown"},
+        {title: "Slider Carousel", to: "/slider"},
+
+      ]
+    }
+  }
+}
 
 </script>
