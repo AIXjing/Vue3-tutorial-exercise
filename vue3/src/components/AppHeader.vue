@@ -6,6 +6,7 @@
   >
     <router-link v-for="item in list" :key="item.to"
                  class="mx-4" :to="item.to"> {{ item.title }} </router-link>
+    <button class="mx-4"> Log in </button>
 
   </nav>
 </template>
