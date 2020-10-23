@@ -16,6 +16,7 @@
             class="border rounded-lg"
             v-model="newhero"
             placeholder="Type new Hero!"
+            ref="heroRef"
         />
         <button class="border rounded" type="submit">Add Hero</button>
       </form>
@@ -57,6 +58,10 @@ export default {
     // setFullName(){
     //   this.fullname = 'Bitfumes Tutorial'
     // }
+  },
+
+  mounted(){
+    this.$refs.heroRef.focus();
   },
 
   computed: {

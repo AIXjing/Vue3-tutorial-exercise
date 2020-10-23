@@ -6,13 +6,17 @@
   >
     <router-link v-for="item in list" :key="item.to"
                  class="mx-4" :to="item.to"> {{ item.title }} </router-link>
-    <button class="mx-4"> Log in </button>
 
+    <button v-if="isLoggedIn" class="mx-4" @click="logout"> Log out </button>
+    <button v-else class="mx-4" @click="$emit('open-login-modal')"> Log in </button>
   </nav>
 </template>
 
 <script>
+import firebase from "@/utilities/firebase"
 export default {
+  props: {isLoggedIn: Boolean},
+
   data(){
     return {
       list:[
@@ -22,6 +26,16 @@ export default {
         {title: "Slider Carousel", to: "/slider"},
 
       ]
+    }
+  },
+
+  methods: {
+    logout() {
+      firebase
+      .auth()
+      .signOut()
+      .then((res) => {res})
+      .catch((e) => {e});
     }
   }
 }
