@@ -12,18 +12,18 @@
 
 import firebase from "@/utilities/firebase";
 
-export  default {
+export default {
   methods: {
-  loginWithGoogle() {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then(() => {
-          this.$emit("close-login-from-google");
-        });
+    loginWithGoogle() {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      firebase
+          .auth()
+          .signInWithPopup(provider)
+          .then(() => {
+            this.$emit("close-login-from-google");
+          });
+    }
   }
-}
 
 }
 
