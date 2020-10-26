@@ -1,7 +1,7 @@
 <template>
 
     <div class="m-auto">
-      <h1 class="text-2xl text-center"> My Heros </h1>
+      <h1 class="text-2xl text-center"> My Heros {{herosCount}}</h1>
       <ul>
         <li class="flex justify-between" v-for="(hero,index) in heros" :key="hero.name">
           <div>
@@ -24,50 +24,51 @@
 </template>
 
 <script>
+import { onMounted, ref,  computed } from "vue";
+
 export default {
-  data() {
-    return {
-      heros: [
-        {name: "Fuyang Baby"},
-        {name: "Wonder Jing"},
-        {name: "Fector"},
-        {name: "Fugo"}
-      ],
-      newhero: "",
-      // fname: "Sar",
-      // lname: "Shri",
-      attribute: "value",
-      isDisable: false,
+  setup(){
+
+    const heroRef = ref("")
+    const newhero = ref("")
+    const heros = ref([
+      {name: "Fuyang Baby"},
+      {name: "Wonder Jing"},
+      {name: "Fector"},
+      {name: "Fugo"}
+    ])
+
+    onMounted(() => {
+      heroRef.value.focus()
+    })
+
+    function remove(index){
+        heros.value = heros.value.filter((hero, i) => i !== index)
     }
-  },
-  methods: {
-    addHero() {
-      if (this.newhero == "") {
+
+    function addHero() {
+      if (newhero.value == "") {
         alert("Type hero name!");
         return
       }
-      this.heros.push({name: this.newhero});
-      this.newhero = '';
-    },
-    remove(index) {
-      this.heros = this.heros.filter((hero, i) => i !== index)
+      heros.value.push({name: newhero.value});
+      newhero.value = '';
     }
+
+    const herosCount = computed({
+      get: () => heros.value.length
+    })
+
+    return {heros, newhero, remove, addHero, heroRef, herosCount};
+  },
+
     // randM() {
     //   return Math.random();
     // },
     // setFullName(){
     //   this.fullname = 'Bitfumes Tutorial'
     // }
-  },
 
-  mounted(){
-    this.$refs.heroRef.focus();
-  },
-
-  computed: {
-    herosCount() {
-      return this.heros.length
-    },
     // randC() {
     //   return Math.random()
     // },
@@ -81,7 +82,6 @@ export default {
     //     this.lname = values[1];
     //   },
     // },
-  }
 }
 
 </script>

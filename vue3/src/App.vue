@@ -5,7 +5,7 @@
   </div>
   <LoginModal v-if="isLoginOpen" @close-login="isLoginOpen=false"/>
   <div>{{authUser.displayName}}</div>
-  <img :src="authUser.photoURL">
+  <img :src="authUser.photoURL"/>
 </template>
 
 <script>
