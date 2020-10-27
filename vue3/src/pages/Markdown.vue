@@ -15,40 +15,41 @@
       </article>
     </section>
   </div>
+  <div>
+    <p v-for="item in items" :key="item">{{item}}}</p>
+  </div>
 </template>
 
-
 <script>
-import marked from "marked"
-import debounce from "@/utilities/mixins/debounce"
+import marked from "marked";
+import useDebounce from "@/components/composition/useDebounce";
+import { itemStore } from "@/store/store";
 
 export default {
-
-  mixins: [debounce],
-
-  data(){
-    return{
-      text:"",
-    }
+  data() {
+    return {
+      text: "**this is markdown app**",
+      debounce: "",
+      items: itemStore.state.items,
+    };
   },
-
-  computed:{
+  computed: {
     markedText() {
-      return marked(this.text)
-    }
+      return marked(this.text);
+    },
   },
-
   methods: {
-    update(e){
+    update(e) {
       const task = () => (this.text = e.target.value);
       this.debounce(task, 500);
+      console.log(itemStore)
     },
-
-
-    mounted(){
-      this.$refs.markdownTextArea.focus();
-    }
-
-  }
-}
+  },
+  mounted() {
+    this.debounce = useDebounce();
+    this.$refs.markdownTextArea.focus();
+  },
+};
 </script>
+
+<style></style>

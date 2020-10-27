@@ -114,8 +114,8 @@
 
 <script>
 import {ref} from "vue";
-import {onMounted, onUnmounted} from "vue";
-
+import useWindowEvent from "@/components/composition/useWindowEvent";
+import { itemStore } from "@/store/store";
 
 export default {
   setup() {
@@ -166,12 +166,15 @@ export default {
       }
 
       function clear(){currentNum.value = ""}
+
+      console.log("pressed")
+      itemStore.addItem("item1")
+      console.log(itemStore.state.items)
     }
 
 
     const handleKeydown = (e) => pressed(e.key);
-    onMounted(() => window.addEventListener("keydown", handleKeydown))
-    onUnmounted(() => window.removeEventListener("keydown", handleKeydown))
+    useWindowEvent('keydown', handleKeydown)
     return {currentNum, pressed, prevNum, selectedOperation};
   }
 }
